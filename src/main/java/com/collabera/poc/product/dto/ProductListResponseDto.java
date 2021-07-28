@@ -6,10 +6,7 @@ import lombok.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Getter
-@Setter
-@ToString
-@NoArgsConstructor
+@Data
 public class ProductListResponseDto {
     private List<ProductResponseDto> products;
 

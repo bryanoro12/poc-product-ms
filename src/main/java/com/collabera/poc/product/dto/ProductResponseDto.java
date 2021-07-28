@@ -3,19 +3,15 @@ package com.collabera.poc.product.dto;
 import com.collabera.poc.product.entity.Product;
 import lombok.*;
 
-@Getter
-@Setter
-@ToString
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class ProductResponseDto {
     private String name;
-    private String description;
+    private String productCode;
     private String price;
 
     public ProductResponseDto(final Product product) {
         this.name = product.getName();
-        this.description = product.getDescription();
+        this.productCode = product.getProductCode();
         this.price = String.valueOf(product.getPrice());
     }
 }

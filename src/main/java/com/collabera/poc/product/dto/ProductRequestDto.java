@@ -2,11 +2,7 @@ package com.collabera.poc.product.dto;
 
 import lombok.*;
 
-@Getter
-@Setter
-@ToString
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class ProductRequestDto {
     private String name;
     private String description;

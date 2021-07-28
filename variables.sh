@@ -6,7 +6,7 @@ case "$1" in
         export SPRING_DATASOURCE_USERNAME='product_ms_role'
         export SPRING_DATASOURCE_PASSWORD='product_ms_role'
 
-        export DATABASE_ACTION='none'
+        export DATABASE_ACTION='update'
     ;;
 
   "docker")
@@ -14,7 +14,7 @@ case "$1" in
         export SPRING_DATASOURCE_USERNAME='product_ms_role'
         export SPRING_DATASOURCE_PASSWORD='product_ms_role'
 
-        export DATABASE_ACTION='none'
+        export DATABASE_ACTION='update'
     ;;
 
 	*)

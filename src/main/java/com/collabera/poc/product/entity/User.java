@@ -1,17 +1,17 @@
 package com.collabera.poc.product.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.sun.istack.NotNull;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Getter
-@Setter
-@ToString
-@Builder(toBuilder = true)
+@Data
+@Builder
 @Entity(name = "user")
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,18 +20,17 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+    @Column(nullable = false)
     private String name;
 
-    @NotNull
+    @Column(nullable = false)
     private String email;
 
-    @NotNull
+    @Column(nullable = false)
     private String address;
 
-    @NotNull
+    @Column(nullable = false)
     @CreationTimestamp
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    @Column(name = "created_date")
     private LocalDateTime createdDate;
 }

@@ -4,6 +4,7 @@ import com.collabera.poc.product.dto.UserRequestDto;
 import com.collabera.poc.product.entity.User;
 import com.collabera.poc.product.repository.UserRepository;
 import com.collabera.poc.product.service.UserService;
+import com.collabera.poc.product.service.UserValidationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
+    private final UserValidationService userValidationService;
     private final UserRepository userRepository;
 
     /**
@@ -23,8 +25,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public User add(final UserRequestDto userRequestDto) {
         log.info("Request: {}", userRequestDto.toString());
+        userValidationService.validateRequestBody(userRequestDto);
+
         log.info("Adding User...");
-        return userRepository.save(this.convertDtoToUser(userRequestDto));
+        final User user = userRepository.save(this.convertDtoToUser(userRequestDto));
+
+        log.info("User save successfully.");
+        log.info("User : {}", user.toString());
+        return user;
     }
 
     /**
@@ -36,14 +44,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public User convertDtoToUser(final UserRequestDto userRequestDto) {
         log.info("Converting DTO to User...");
-        final User user = User.builder()
+        return User.builder()
             .name(userRequestDto.getName())
-            .email(userRequestDto.getName())
+            .email(userRequestDto.getEmail())
             .address(userRequestDto.getAddress())
             .build();
-
-        log.info("User save successfully.");
-        log.info("User: {}", user.toString());
-        return user;
     }
 }
