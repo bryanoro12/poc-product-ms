@@ -7,7 +7,9 @@ import com.collabera.poc.product.entity.Product;
 import com.collabera.poc.product.entity.User;
 
 public interface BookingService {
-    Booking book(RequestHeaders requestHeaders, BookingRequestDto bookingRequestDto);
+    Booking book(
+        RequestHeaders requestHeaders,
+        BookingRequestDto bookingRequestDto);
 
     Booking get(String referenceNumber);
 

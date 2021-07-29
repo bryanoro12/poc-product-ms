@@ -8,5 +8,4 @@ public class ProductRequestDto {
     private String description;
     private String price;
     private String createdBy;
-    private String updatedBy;
 }

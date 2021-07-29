@@ -1,4 +1,4 @@
-package com.collabera.poc.product.config;
+package com.collabera.poc.product.config.exceptionhandler;
 
 import com.collabera.poc.product.common.dto.ErrorMessage;
 import com.collabera.poc.product.exception.BadRequestException;
@@ -6,6 +6,7 @@ import com.collabera.poc.product.exception.InvalidRequestParameterException;
 import com.collabera.poc.product.exception.ProductNotFoundException;
 import com.collabera.poc.product.exception.UserNotFoundException;
 import com.collabera.poc.product.util.ErrorMessageUtil;
+import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,17 +18,15 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
-import javax.servlet.http.HttpServletRequest;
-
 @Log4j2
 @RestControllerAdvice
 public class ExceptionResolverConfig {
+
     /**
      * Bad request handling
      *
      * @param exception
      * @param request
-     * @param servletRequest
      * @return
      */
     @ExceptionHandler({
@@ -35,10 +34,10 @@ public class ExceptionResolverConfig {
         ProductNotFoundException.class,
         UserNotFoundException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @SneakyThrows
     public ResponseEntity<ErrorMessage> badRequestHandler(
         final BadRequestException exception,
         final WebRequest request,
-        final HttpServletRequest servletRequest,
         final HandlerMethod handlerMethod
     ) {
         log.info(request.toString());
@@ -58,15 +57,13 @@ public class ExceptionResolverConfig {
      *
      * @param exception
      * @param request
-     * @param servletRequest
      * @return
      */
     @ExceptionHandler(NoHandlerFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<ErrorMessage> pathNotFoundHandler(
         final NoHandlerFoundException exception,
-        final WebRequest request,
-        final HttpServletRequest servletRequest
+        final WebRequest request
     ) {
         log.info(request.toString());
         log.info(exception.getClass().getCanonicalName());
@@ -82,15 +79,13 @@ public class ExceptionResolverConfig {
      *
      * @param exception
      * @param request
-     * @param servletRequest
      * @return
      */
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
     public ResponseEntity<ErrorMessage> methodNotAllowedHandler(
         final Exception exception,
-        final WebRequest request,
-        final HttpServletRequest servletRequest
+        final WebRequest request
     ) {
         log.info(request.toString());
         log.info(exception.getClass().getCanonicalName());
@@ -107,7 +102,6 @@ public class ExceptionResolverConfig {
      *
      * @param exception
      * @param request
-     * @param servletRequest
      * @param handlerMethod
      * @return
      */
@@ -116,7 +110,6 @@ public class ExceptionResolverConfig {
     public ResponseEntity<ErrorMessage> globalExceptionHandler(
         final Exception exception,
         final WebRequest request,
-        final HttpServletRequest servletRequest,
         final HandlerMethod handlerMethod
     ) {
         log.info(request.toString());

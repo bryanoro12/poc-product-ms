@@ -1,23 +1,30 @@
 package com.collabera.poc.product.service.impl;
 
+import com.collabera.poc.product.common.dto.ActivityLog;
 import com.collabera.poc.product.common.dto.RequestHeaders;
 import com.collabera.poc.product.dto.BookingRequestDto;
 import com.collabera.poc.product.entity.Booking;
 import com.collabera.poc.product.entity.Product;
 import com.collabera.poc.product.entity.User;
+import com.collabera.poc.product.enums.Action;
 import com.collabera.poc.product.enums.Status;
 import com.collabera.poc.product.exception.ProductNotFoundException;
 import com.collabera.poc.product.exception.UserNotFoundException;
 import com.collabera.poc.product.repository.BookingRepository;
 import com.collabera.poc.product.repository.ProductRepository;
 import com.collabera.poc.product.repository.UserRepository;
+import com.collabera.poc.product.service.ActivityLogService;
 import com.collabera.poc.product.service.BookingService;
 import com.collabera.poc.product.service.BookingValidationService;
+import com.collabera.poc.product.service.KafkaService;
+import com.collabera.poc.product.util.DateTimeUtil;
 import com.collabera.poc.product.util.ErrorMessageUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 @Log4j2
@@ -28,9 +35,11 @@ public class BookingServiceImpl implements BookingService {
     private final BookingRepository bookingRepository;
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
+    private final ActivityLogService activityLogService;
+    private final KafkaService kafkaService;
 
     /**
-     * Book Product
+     * Create book
      *
      * @param requestHeaders
      * @param bookingRequestDto
@@ -64,6 +73,17 @@ public class BookingServiceImpl implements BookingService {
 
         log.info("Booking save successfully.");
         log.info("Booking: {}", booking.toString());
+
+        final String message = activityLogService.convertActivityLogToString(
+            ActivityLog.builder()
+                .action(Action.BOOK.toLabel())
+                .userName(user.getName())
+                .productName(product.getName())
+                .productCode(product.getProductCode())
+                .build());
+
+        log.info("Message {}", message);
+        kafkaService.sendMessage(message);
         return booking;
     }
 
@@ -75,7 +95,9 @@ public class BookingServiceImpl implements BookingService {
      */
     @Override
     public Booking get(final String referenceNumber) {
-        return bookingRepository.findByReferenceNumber(referenceNumber).orElse(new Booking());
+        return bookingRepository
+            .findByReferenceNumber(referenceNumber)
+            .orElse(new Booking());
     }
 
     /**
@@ -99,8 +121,12 @@ public class BookingServiceImpl implements BookingService {
             .requestId(requestHeaders.getRequestId())
             .user(user)
             .product(product)
-            .startDate(bookingRequestDto.getStartDate())
-            .endDate(bookingRequestDto.getEndDate())
+            .startDate(LocalDateTime.parse(
+                bookingRequestDto.getStartDate(),
+                DateTimeFormatter.ofPattern(DateTimeUtil.YYYYMMDDHHMM)))
+            .endDate(LocalDateTime.parse(
+                bookingRequestDto.getEndDate(),
+                DateTimeFormatter.ofPattern(DateTimeUtil.YYYYMMDDHHMM)))
             .referenceNumber(UUID.randomUUID().toString())
             .status(Status.PENDING.toLabel())
             .message(Status.PENDING.toMessage())

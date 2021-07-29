@@ -22,9 +22,7 @@ public class UserController {
      * @return
      */
     @PostMapping("/user")
-    public ResponseEntity<User> addUser(
-        @RequestBody final UserRequestDto userRequestDto
-    ) {
+    public ResponseEntity<User> addUser(@RequestBody final UserRequestDto userRequestDto) {
         return new ResponseEntity<>(
             userService.add(userRequestDto),
             HttpStatus.CREATED);

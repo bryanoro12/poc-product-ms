@@ -30,6 +30,8 @@ public final class ErrorMessageUtil {
         "P_007", "Duplicate product name.");
     public static final ErrorMessage ERROR_400_P_PRODUCT_CODE_DOES_NOT_EXIST  = new ErrorMessage(
         "P_008", "Product Code does not exists.");
+    public static final ErrorMessage ERROR_400_P_INVALID_CREATED_BY  = new ErrorMessage(
+        "P_009", "Invalid or missing createdBy.");
 
     // Booking
     public static final ErrorMessage ERROR_400_B_INVALID_USERNAME  = new ErrorMessage(

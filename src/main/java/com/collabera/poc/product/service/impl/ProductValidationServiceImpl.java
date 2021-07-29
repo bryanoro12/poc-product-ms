@@ -41,6 +41,10 @@ public class ProductValidationServiceImpl implements ProductValidationService {
             productRequestDto.getPrice(),
             ErrorMessageUtil.ERROR_400_P_INVALID_PRICE));
 
+        fields.add(FieldValidationUtil.field(
+            productRequestDto.getCreatedBy(),
+            ErrorMessageUtil.ERROR_400_P_INVALID_CREATED_BY));
+
         FieldValidationUtil.validatePriceFormat(
             productRequestDto.getPrice(),
             ErrorMessageUtil.ERROR_400_P_INVALID_PRICE_FORMAT);

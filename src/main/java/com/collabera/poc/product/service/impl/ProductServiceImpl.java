@@ -1,10 +1,14 @@
 package com.collabera.poc.product.service.impl;
 
+import com.collabera.poc.product.common.dto.ActivityLog;
 import com.collabera.poc.product.common.dto.RequestHeaders;
 import com.collabera.poc.product.dto.ProductRequestDto;
 import com.collabera.poc.product.entity.Product;
+import com.collabera.poc.product.enums.Action;
 import com.collabera.poc.product.exception.ProductNotFoundException;
 import com.collabera.poc.product.repository.ProductRepository;
+import com.collabera.poc.product.service.ActivityLogService;
+import com.collabera.poc.product.service.KafkaService;
 import com.collabera.poc.product.service.ProductService;
 import com.collabera.poc.product.service.ProductValidationService;
 import com.collabera.poc.product.util.ErrorMessageUtil;
@@ -21,6 +25,8 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
     private final ProductValidationService productValidationService;
     private final ProductRepository productRepository;
+    private final ActivityLogService activityLogService;
+    private final KafkaService kafkaService;
 
     /**
      * Save Product
@@ -45,6 +51,17 @@ public class ProductServiceImpl implements ProductService {
 
         log.info("Product save successfully.");
         log.info("Product: {}", product.toString());
+
+        final String message = activityLogService.convertActivityLogToString(
+            ActivityLog.builder()
+                .action(Action.ADD.toLabel())
+                .userName(product.getCreatedBy())
+                .productName(product.getName())
+                .productCode(product.getProductCode())
+                .build());
+
+        log.info("Message {}", message);
+        kafkaService.sendMessage(message);
         return product;
     }
 

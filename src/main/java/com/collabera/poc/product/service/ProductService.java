@@ -7,7 +7,9 @@ import com.collabera.poc.product.entity.Product;
 import java.util.List;
 
 public interface ProductService {
-    Product add(RequestHeaders requestHeaders, ProductRequestDto productRequestDto);
+    Product add(
+        RequestHeaders requestHeaders,
+        ProductRequestDto productRequestDto);
 
     List<Product> getAll();
 

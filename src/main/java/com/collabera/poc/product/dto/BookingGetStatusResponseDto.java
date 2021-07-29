@@ -24,8 +24,8 @@ public class BookingGetStatusResponseDto {
         this.remarks = booking.getRemarks();
         this.user = booking.getUser();
         this.product = booking.getProduct();
-        this.startDate = booking.getStartDate();
-        this.endDate = booking.getEndDate();
+        this.startDate = String.valueOf(booking.getStartDate());
+        this.endDate = String.valueOf(booking.getEndDate());
         this.transactionDate = String.valueOf(booking.getTransactionDate());
     }
 }

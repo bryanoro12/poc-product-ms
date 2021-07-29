@@ -1,7 +1,10 @@
 package com.collabera.poc.product.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -48,10 +51,10 @@ public class Booking {
     private Product product;
 
     @Column(nullable = false)
-    private String startDate;
+    private LocalDateTime startDate;
 
     @Column(nullable = false)
-    private String endDate;
+    private LocalDateTime endDate;
 
     @CreationTimestamp
     @Column(nullable = false)

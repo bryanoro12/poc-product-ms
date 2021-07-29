@@ -9,7 +9,10 @@ public final class ProductCodeUtil {
     }
 
     public static String generateProductCode(final String productName) {
-        final String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
+        final String date = LocalDateTime
+            .now()
+            .format(DateTimeFormatter.ofPattern(DateTimeUtil.YYYYMMDDHHMMSS));
+
         return date + productName;
     }
 }

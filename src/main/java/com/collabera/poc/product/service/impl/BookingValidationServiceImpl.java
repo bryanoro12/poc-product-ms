@@ -45,6 +45,14 @@ public class BookingValidationServiceImpl implements BookingValidationService {
             bookingRequestDto.getEndDate(),
             ErrorMessageUtil.ERROR_400_B_INVALID_ENDDATE));
 
+        FieldValidationUtil.validateDateFormat(
+            bookingRequestDto.getStartDate(),
+            ErrorMessageUtil.ERROR_400_B_INVALID_STARTDATE_FORMAT);
+
+        FieldValidationUtil.validateDateFormat(
+            bookingRequestDto.getEndDate(),
+            ErrorMessageUtil.ERROR_400_B_INVALID_ENDATE_FORMAT);
+
         FieldValidationUtil.validateFields(fields);
     }
 

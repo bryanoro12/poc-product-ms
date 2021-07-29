@@ -2,7 +2,9 @@ package com.collabera.poc.product.exception;
 
 import com.collabera.poc.product.common.dto.ErrorMessage;
 
-public class BadRequestException extends RuntimeException {
+import java.io.Serializable;
+
+public class BadRequestException extends RuntimeException implements Serializable {
     private final ErrorMessage errorMessage;
 
     public BadRequestException(final ErrorMessage errorMessage) {

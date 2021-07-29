@@ -5,13 +5,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
-
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ErrorMessage implements Serializable {
-    private String errorCode;
-    private String description;
+public class ActivityLog {
+    private String action;
+    private String userName;
+    private String productName;
+    private String productCode;
 }
