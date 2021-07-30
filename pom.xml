@@ -52,6 +52,12 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- API docs -->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>1.5.9</version>
+		</dependency>
 		<!-- Apache Commons Validator -->
 		<dependency>
 			<groupId>commons-validator</groupId>
