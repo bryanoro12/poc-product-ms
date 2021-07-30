@@ -8,7 +8,7 @@ case "$1" in
 
         export DATABASE_ACTION='update'
         export KAFKA_BOOTSTRAP_SERVER='localhost:9092'
-        export KAFKA_TOPIC='CollaberaPoc'
+        export KAFKA_TOPIC='DiToMakikitaHaha'
     ;;
 
   "docker")
