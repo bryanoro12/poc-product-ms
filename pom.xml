@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.collabera.poc</groupId>
 	<artifactId>poc-product-ms</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>poc-product-ms</name>
 	<description>Collabera POC Project</description>
 	<properties>
@@ -52,11 +52,17 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- API docs -->
+		<!-- Spring fox -->
 		<dependency>
-			<groupId>org.springdoc</groupId>
-			<artifactId>springdoc-openapi-ui</artifactId>
-			<version>1.5.9</version>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-boot-starter</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+		<!-- Commons Lang3 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.12.0</version>
 		</dependency>
 		<!-- Apache Commons Validator -->
 		<dependency>

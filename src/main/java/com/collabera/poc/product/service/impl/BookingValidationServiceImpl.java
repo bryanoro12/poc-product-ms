@@ -1,7 +1,9 @@
 package com.collabera.poc.product.service.impl;
 
 import com.collabera.poc.product.common.dto.RequestHeaders;
+import com.collabera.poc.product.dto.BookingAcceptRequestDto;
 import com.collabera.poc.product.dto.BookingRequestDto;
+import com.collabera.poc.product.enums.Status;
 import com.collabera.poc.product.exception.InvalidRequestParameterException;
 import com.collabera.poc.product.repository.BookingRepository;
 import com.collabera.poc.product.service.BookingValidationService;
@@ -9,6 +11,7 @@ import com.collabera.poc.product.util.ErrorMessageUtil;
 import com.collabera.poc.product.util.FieldValidationUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.apache.commons.lang3.EnumUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -54,6 +57,22 @@ public class BookingValidationServiceImpl implements BookingValidationService {
             ErrorMessageUtil.ERROR_400_B_INVALID_ENDATE_FORMAT);
 
         FieldValidationUtil.validateFields(fields);
+    }
+
+    /**
+     * Validate Accept Booking Request Body
+     * @param bookingAcceptRequestDto
+     */
+    @Override
+    public void validateRequestBody(final BookingAcceptRequestDto bookingAcceptRequestDto) {
+        log.info("Validating booking accept request body...");
+        FieldValidationUtil.validateField(
+            bookingAcceptRequestDto.getStatus(),
+            ErrorMessageUtil.ERROR_400_B_INVALID_STATUS);
+
+        if (!EnumUtils.isValidEnumIgnoreCase(Status.class, bookingAcceptRequestDto.getStatus())) {
+            throw new InvalidRequestParameterException(ErrorMessageUtil.ERROR_400_B_INVALID_STATUS);
+        }
     }
 
     /**

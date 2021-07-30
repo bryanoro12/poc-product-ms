@@ -3,11 +3,16 @@ package com.collabera.poc.product.controller;
 import com.collabera.poc.product.dto.UserRequestDto;
 import com.collabera.poc.product.entity.User;
 import com.collabera.poc.product.service.UserService;
+import com.collabera.poc.product.util.ResponseCodesUtil;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -21,6 +26,11 @@ public class UserController {
      * @param userRequestDto
      * @return
      */
+    @ApiOperation(value = "Create User")
+    @ApiResponses(value = {
+        @ApiResponse(code = ResponseCodesUtil.BAD_REQUEST, message = "Invalid request parameter"),
+        @ApiResponse(code = ResponseCodesUtil.CREATED, message = "Successful create user")})
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/user")
     public ResponseEntity<User> addUser(@RequestBody final UserRequestDto userRequestDto) {
         return new ResponseEntity<>(

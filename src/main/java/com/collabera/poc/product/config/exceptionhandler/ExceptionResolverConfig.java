@@ -1,10 +1,7 @@
 package com.collabera.poc.product.config.exceptionhandler;
 
 import com.collabera.poc.product.common.dto.ErrorMessage;
-import com.collabera.poc.product.exception.BadRequestException;
-import com.collabera.poc.product.exception.InvalidRequestParameterException;
-import com.collabera.poc.product.exception.ProductNotFoundException;
-import com.collabera.poc.product.exception.UserNotFoundException;
+import com.collabera.poc.product.exception.*;
 import com.collabera.poc.product.util.ErrorMessageUtil;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
@@ -32,7 +29,8 @@ public class ExceptionResolverConfig {
     @ExceptionHandler({
         InvalidRequestParameterException.class,
         ProductNotFoundException.class,
-        UserNotFoundException.class})
+        UserNotFoundException.class,
+        BookingNotFoundException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @SneakyThrows
     public ResponseEntity<ErrorMessage> badRequestHandler(

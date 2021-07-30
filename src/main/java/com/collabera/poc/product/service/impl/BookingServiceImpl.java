@@ -2,12 +2,14 @@ package com.collabera.poc.product.service.impl;
 
 import com.collabera.poc.product.common.dto.ActivityLog;
 import com.collabera.poc.product.common.dto.RequestHeaders;
+import com.collabera.poc.product.dto.BookingAcceptRequestDto;
 import com.collabera.poc.product.dto.BookingRequestDto;
 import com.collabera.poc.product.entity.Booking;
 import com.collabera.poc.product.entity.Product;
 import com.collabera.poc.product.entity.User;
 import com.collabera.poc.product.enums.Action;
 import com.collabera.poc.product.enums.Status;
+import com.collabera.poc.product.exception.BookingNotFoundException;
 import com.collabera.poc.product.exception.ProductNotFoundException;
 import com.collabera.poc.product.exception.UserNotFoundException;
 import com.collabera.poc.product.repository.BookingRepository;
@@ -98,6 +100,36 @@ public class BookingServiceImpl implements BookingService {
         return bookingRepository
             .findByReferenceNumber(referenceNumber)
             .orElse(new Booking());
+    }
+
+    /**
+     * Accept Booking
+     *
+     * @param referenceNumber
+     * @param bookingAcceptRequestDto
+     * @return
+     */
+    @Override
+    public Booking accept(
+        final String referenceNumber,
+        final BookingAcceptRequestDto bookingAcceptRequestDto
+    ) {
+        log.info("Request: {}", bookingAcceptRequestDto.toString());
+        final Booking booking = bookingRepository
+            .findByReferenceNumber(referenceNumber)
+            .orElseThrow(() -> new BookingNotFoundException(
+                ErrorMessageUtil.ERROR_400_B_BOOKING_DOES_NOT_EXISTS));
+
+        bookingValidationService.validateRequestBody(bookingAcceptRequestDto);
+
+        final Status status = Status.valueOf(bookingAcceptRequestDto.getStatus().toUpperCase());
+        booking.setStatus(status.toLabel());
+        booking.setMessage(status.toMessage());
+        booking.setRemarks(bookingAcceptRequestDto.getRemarks());
+        bookingRepository.save(booking);
+
+        log.info("Booking accepted successfully.");
+        return booking;
     }
 
     /**

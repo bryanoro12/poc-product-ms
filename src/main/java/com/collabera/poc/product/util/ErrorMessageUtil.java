@@ -54,6 +54,10 @@ public final class ErrorMessageUtil {
         "B_009", "Invalid or missing requestId.");
     public static final ErrorMessage ERROR_400_B_DUPLICATE_REQUEST_ID  = new ErrorMessage(
         "B_010", "Duplicate requestId.");
+    public static final ErrorMessage ERROR_400_B_BOOKING_DOES_NOT_EXISTS  = new ErrorMessage(
+        "B_011", "Booking does not exists.");
+    public static final ErrorMessage ERROR_400_B_INVALID_STATUS  = new ErrorMessage(
+        "B_012", "Invalid or missing status.");
 
     // Global
     public static final ErrorMessage ERROR_404_G_NOT_FOUND  = new ErrorMessage(

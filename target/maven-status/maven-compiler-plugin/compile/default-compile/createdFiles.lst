@@ -17,6 +17,7 @@ com\collabera\poc\product\common\dto\ActivityLog.class
 com\collabera\poc\product\service\impl\BookingValidationServiceImpl.class
 com\collabera\poc\product\repository\UserRepository.class
 com\collabera\poc\product\service\impl\BookingServiceImpl.class
+com\collabera\poc\product\dto\BookingAcceptRequestDto.class
 com\collabera\poc\product\dto\BookingResponseDto.class
 com\collabera\poc\product\service\impl\ActivityLogServiceImpl.class
 com\collabera\poc\product\exception\UserNotFoundException.class
@@ -48,6 +49,7 @@ com\collabera\poc\product\common\dto\ErrorMessage.class
 com\collabera\poc\product\service\ProductValidationService.class
 com\collabera\poc\product\service\UserService.class
 com\collabera\poc\product\exception\ProductNotFoundException.class
+com\collabera\poc\product\exception\BookingNotFoundException.class
 com\collabera\poc\product\service\impl\KafkaServiceImpl.class
 com\collabera\poc\product\enums\Action.class
 com\collabera\poc\product\service\impl\ProductValidationServiceImpl.class

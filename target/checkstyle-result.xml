@@ -10,11 +10,15 @@
 </file>
 <file name="C:\ws\collabera\poc-product-ms\src\main\java\com\collabera\poc\product\config\kafka\KafkaProducerConfig.java">
 </file>
+<file name="C:\ws\collabera\poc-product-ms\src\main\java\com\collabera\poc\product\config\swagger\OpenApiConfig.java">
+</file>
 <file name="C:\ws\collabera\poc-product-ms\src\main\java\com\collabera\poc\product\controller\BookingController.java">
 </file>
 <file name="C:\ws\collabera\poc-product-ms\src\main\java\com\collabera\poc\product\controller\ProductController.java">
 </file>
 <file name="C:\ws\collabera\poc-product-ms\src\main\java\com\collabera\poc\product\controller\UserController.java">
+</file>
+<file name="C:\ws\collabera\poc-product-ms\src\main\java\com\collabera\poc\product\dto\BookingAcceptRequestDto.java">
 </file>
 <file name="C:\ws\collabera\poc-product-ms\src\main\java\com\collabera\poc\product\dto\BookingGetStatusResponseDto.java">
 </file>
@@ -41,6 +45,8 @@
 <file name="C:\ws\collabera\poc-product-ms\src\main\java\com\collabera\poc\product\enums\Status.java">
 </file>
 <file name="C:\ws\collabera\poc-product-ms\src\main\java\com\collabera\poc\product\exception\BadRequestException.java">
+</file>
+<file name="C:\ws\collabera\poc-product-ms\src\main\java\com\collabera\poc\product\exception\BookingNotFoundException.java">
 </file>
 <file name="C:\ws\collabera\poc-product-ms\src\main\java\com\collabera\poc\product\exception\InvalidRequestParameterException.java">
 </file>
