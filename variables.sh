@@ -7,6 +7,8 @@ case "$1" in
         export SPRING_DATASOURCE_PASSWORD='product_ms_role'
 
         export DATABASE_ACTION='update'
+        export KAFKA_BOOTSTRAP_SERVER='localhost:9092'
+        export KAFKA_TOPIC='CollaberaPoc'
     ;;
 
   "docker")
