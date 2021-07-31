@@ -29,7 +29,7 @@ public final class ErrorMessageUtil {
     public static final ErrorMessage ERROR_400_P_DUPLICATE_PRODUCT_NAME  = new ErrorMessage(
         "P_007", "Duplicate product name.");
     public static final ErrorMessage ERROR_400_P_PRODUCT_CODE_DOES_NOT_EXIST  = new ErrorMessage(
-        "P_008", "Product Code does not exists.");
+        "P_008", "Product Code does not exist.");
     public static final ErrorMessage ERROR_400_P_INVALID_CREATED_BY  = new ErrorMessage(
         "P_009", "Invalid or missing createdBy.");
 
@@ -43,9 +43,9 @@ public final class ErrorMessageUtil {
     public static final ErrorMessage ERROR_400_B_INVALID_ENDDATE  = new ErrorMessage(
         "B_004", "Invalid or missing endDate.");
     public static final ErrorMessage ERROR_400_B_USERNAME_DOES_NOT_EXIST  = new ErrorMessage(
-        "B_005", "userName does not exists.");
+        "B_005", "userName does not exist.");
     public static final ErrorMessage ERROR_400_B_PRODUCT_CODE_DOES_NOT_EXIST  = new ErrorMessage(
-        "B_006", "productCode does not exists.");
+        "B_006", "productCode does not exist.");
     public static final ErrorMessage ERROR_400_B_INVALID_STARTDATE_FORMAT  = new ErrorMessage(
         "B_007", "Invalid startDate format.");
     public static final ErrorMessage ERROR_400_B_INVALID_ENDATE_FORMAT  = new ErrorMessage(
@@ -54,8 +54,8 @@ public final class ErrorMessageUtil {
         "B_009", "Invalid or missing requestId.");
     public static final ErrorMessage ERROR_400_B_DUPLICATE_REQUEST_ID  = new ErrorMessage(
         "B_010", "Duplicate requestId.");
-    public static final ErrorMessage ERROR_400_B_BOOKING_DOES_NOT_EXISTS  = new ErrorMessage(
-        "B_011", "Booking does not exists.");
+    public static final ErrorMessage ERROR_400_B_BOOKING_DOES_NOT_EXIST = new ErrorMessage(
+        "B_011", "Booking does not exist.");
     public static final ErrorMessage ERROR_400_B_INVALID_STATUS  = new ErrorMessage(
         "B_012", "Invalid or missing status.");
 

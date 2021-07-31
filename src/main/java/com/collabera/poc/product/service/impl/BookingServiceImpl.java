@@ -118,7 +118,7 @@ public class BookingServiceImpl implements BookingService {
         final Booking booking = bookingRepository
             .findByReferenceNumber(referenceNumber)
             .orElseThrow(() -> new BookingNotFoundException(
-                ErrorMessageUtil.ERROR_400_B_BOOKING_DOES_NOT_EXISTS));
+                ErrorMessageUtil.ERROR_400_B_BOOKING_DOES_NOT_EXIST));
 
         bookingValidationService.validateRequestBody(bookingAcceptRequestDto);
 

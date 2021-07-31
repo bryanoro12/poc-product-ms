@@ -9,8 +9,8 @@ public class BookingRequestDto {
     private String userName;
     @ApiModelProperty(example = "20210727000951HONDA_CIVIC")
     private String productCode;
-    @ApiModelProperty(example = "2020-01-19")
+    @ApiModelProperty(example = "2020-01-19 13:00")
     private String startDate;
-    @ApiModelProperty(example = "2020-01-21")
+    @ApiModelProperty(example = "2020-01-21 14:00")
     private String endDate;
 }
