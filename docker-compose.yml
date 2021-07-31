@@ -1,0 +1,70 @@
+version: "3"
+
+networks:
+  collabera-poc-ms-network:
+    driver: bridge
+
+services:
+  zookeeper:
+    image: "wurstmeister/zookeeper"
+    container_name: zookeeper
+    restart: always
+    ports:
+      - "2181:2181"
+    networks:
+      - collabera-poc-ms-network
+
+  kafka:
+    image: "wurstmeister/kafka"
+    container_name: kafka
+    restart: always
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: kafka
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+    networks:
+      - collabera-poc-ms-network
+  db:
+    image: "mysql:latest"
+    container_name: db
+    restart: always
+    environment:
+      MYSQL_DATABASE: poc_db
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - "3307:3306"
+    networks:
+      - collabera-poc-ms-network
+  poc-product-ms:
+    image: "bryanoro12/poc-product-ms:1.0.3"
+    container_name: product-ms
+    ports:
+      - "9095:9095"
+    restart: always
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/poc_db?autoReconnect=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: password
+      DATABASE_ACTION: update
+      KAFKA_BOOTSTRAP_SERVER: kafka:9092
+      KAFKA_TOPIC: CollaberaPoc
+    networks:
+      - collabera-poc-ms-network
+  poc-activity-log-ms:
+    image: "bryanoro12/poc-activity-log-ms:1.0.0"
+    container_name: activity-log-ms
+    ports:
+      - "9096:9096"
+    restart: always
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/poc_db?autoReconnect=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: password
+      DATABASE_ACTION: update
+      KAFKA_BOOTSTRAP_SERVER: kafka:9092
+      KAFKA_OFFSET_RESET: earliest
+      KAFKA_GROUP_ID: CollaberaPocGroup
+      KAFKA_TOPIC: CollaberaPoc
+    networks:
+      - collabera-poc-ms-network
